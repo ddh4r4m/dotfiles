@@ -66,6 +66,9 @@ brew install stow
 brew install fzf
 ```
 
+```
+brew install thefuck
+```
 
 ```
 git clone https://github.com/zsh-users/zsh-completions.git \

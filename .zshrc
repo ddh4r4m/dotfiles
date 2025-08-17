@@ -57,6 +57,12 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$(brew --prefix nvm)/etc/bash_completion.d/nvm" ] && \. "$(brew --prefix nvm)/etc/bash_completion.d/nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
+
+# the fuck alias
+eval $(thefuck --alias)
+# You can use whatever you want as an alias, like for Mondays:
+eval $(thefuck --alias fuck)
+
 # Shell integrations (these should be at the end)
 eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd cd zsh)"
