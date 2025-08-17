@@ -32,3 +32,36 @@ then use GNU stow to create symlinks
 ```
 $ stow .
 ```
+
+## Other Packages
+```
+brew install zoxide
+```
+
+```
+brew install ripgrep
+```
+
+```
+brew install fd
+```
+
+```
+brew install tmux
+```
+
+```
+brew install gh
+```
+
+```
+brew install jq
+```
+
+```
+brew install stow
+```
+
+```
+brew install fzf
+```
