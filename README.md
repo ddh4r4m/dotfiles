@@ -76,6 +76,13 @@ git clone https://github.com/zsh-users/zsh-completions.git \
 ```
 
 
+# install tmux plugins
+ctrl+s + I 
+```
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+```
+
+
 ```
 Update your ~/.zshrc configuration before sourcing oh-my-zsh:
 fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
