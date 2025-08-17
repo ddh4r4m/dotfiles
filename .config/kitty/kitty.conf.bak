@@ -1,0 +1,31 @@
+font_family JetBrains Mono
+font_size 14.0
+cursor_shape block
+cursor_blink_interval 0
+
+# Background opacity
+background_opacity 0.9
+
+# Color scheme
+foreground #ffffff
+background #1e1e1e
+
+# Remove window decorations
+hide_window_decorations yes
+
+# Tab bar
+tab_bar_style powerline
+tab_powerline_style round
+
+# Window padding
+window_padding_width 10
+
+# Split windows (similar to iTerm2)
+map cmd+d new_window_with_cwd
+map cmd+shift+d new_os_window
+
+# Tab management
+map cmd+t new_tab_with_cwd
+map cmd+w close_tab
+
+allow_remote_control yes

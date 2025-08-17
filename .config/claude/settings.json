@@ -1,0 +1,25 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(**)",
+      "Grep(**)",
+      "Edit(*.swift)",
+      "Edit(*.h)",
+      "Edit(*.m)", 
+      "Edit(*.mm)",
+      "Edit(*.plist)",
+      "Edit(*.xcodeproj/**)",
+      "Edit(*.xcworkspace/**)",
+      "Write(*.swift)",
+      "Write(*.h)",
+      "Write(*.m)",
+      "Bash(xcodebuild:*)",
+      "Bash(git:*)"
+    ],
+    "deny": [
+      "Bash(rm:*)",
+      "Bash(rmdir:*)", 
+      "Bash(trash:*)"
+    ]
+  }
+}
