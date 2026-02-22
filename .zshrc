@@ -1,68 +1,73 @@
-# Starship prompt initialization
-eval "$(starship init zsh)"
 
-# Manual plugin loading (since we're not using Oh My Zsh)
+# 1. Faster Completion (Only check once a day)
+autoload -U compinit
+if [[ -n ${ZDOTDIR:-$HOME}/.zcompdump(#qN.m-1) ]]; then
+  compinit -C
+else
+  compinit
+fi
+
+# 2. Lazy-load NVM (This removes the 400ms delay)
+export NVM_DIR="$HOME/.nvm"
+nvm() {
+  unset -f nvm
+  [ -s "$(brew --prefix nvm)/nvm.sh" ] && \. "$(brew --prefix nvm)/nvm.sh"
+  nvm "$@"
+}
+node() { unset -f node npm nvm; nvm use default; node "$@" }
+npm() { unset -f node npm nvm; nvm use default; npm "$@" }
+
+# 3. Prompt & Tool Init (Keep these, but avoid multiple evals)
+#eval "$(starship init zsh)"
+# Replace: eval "$(starship init zsh)"
+# With this (faster):
+# source <(starship init zsh --print-full-init)
+# starship init zsh > ~/.starship_init.zsh
+source ~/.starship_init.zsh
+
+eval "$(zoxide init --cmd cd zsh)"
+eval "$(fzf --zsh)"
+
+# 4. Lazy-load 'thefuck'
+fuck() {
+  eval $(thefuck --alias fuck)
+  fuck "$@"
+}
+
+# 5. Manual plugin loading
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
-# Enable vi mode
+# 6. Vi mode & Keybindings
 bindkey -v
-
-# Vi mode settings 
-VI_MODE_SET_CURSOR=true
-MODE_INDICATOR="%F{white}+%f"
-INSERT_MODE_INDICATOR="%F{yellow}+%f"
-
-# Keybindings for history search
 bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
 bindkey '^[w' kill-region
 
-# History configuration
-HISTSIZE=5000
-HISTFILE=~/.zsh_history
-SAVEHIST=$HISTSIZE
-HISTDUP=erase
-setopt appendhistory
-setopt sharehistory
-setopt hist_ignore_space
-setopt hist_ignore_all_dups
-setopt hist_save_no_dups
-setopt hist_ignore_dups
-setopt hist_find_no_dups
+# 7. Path & Exports (Grouped for clarity)
+export ANDROID_HOME=$HOME/Library/Android/sdk
+export JAVA_HOME="/Applications/Android Studio.app/Contents/jbr/Contents/Home"
+path=(
+  "/Users/dharamdhurandhar/.codeium/windsurf/bin"
+  "$JAVA_HOME/bin"
+  "$ANDROID_HOME/emulator"
+  "$ANDROID_HOME/platform-tools"
+  "$ANDROID_HOME/tools"
+  "$ANDROID_HOME/tools/bin"
+  "$HOME/.local/bin"
+  $path
+)
 
-# Completion system
-fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
-autoload -U compinit && compinit
-
-# Completion styling
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
-zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
-zstyle ':completion:*' menu no
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
-zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
-
-# Aliases
+# 8. Aliases
 alias ls='ls --color'
 alias vim='nvim'
 alias c='clear'
-alias claude="/Users/dharamdhurandhar/.claude/local/claude"
+alias claude-start='tmux new-session "claude --model claude-sonnet-4-6" \; split-window -h -p 30'
 
-# Tool integrations
-export PATH="/Users/dharamdhurandhar/.codeium/windsurf/bin:$PATH"
-
-# NVM configuration
-export NVM_DIR="$HOME/.nvm"
-[ -s "$(brew --prefix nvm)/nvm.sh" ] && \. "$(brew --prefix nvm)/nvm.sh"
-[ -s "$(brew --prefix nvm)/etc/bash_completion.d/nvm" ] && \. "$(brew --prefix nvm)/etc/bash_completion.d/nvm"
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+# 9. History Config
+HISTSIZE=5000
+HISTFILE=~/.zsh_history
+SAVEHIST=$HISTSIZE
+setopt appendhistory sharehistory hist_ignore_all_dups hist_ignore_space
 
 
-# the fuck alias
-eval $(thefuck --alias)
-# You can use whatever you want as an alias, like for Mondays:
-eval $(thefuck --alias fuck)
-
-# Shell integrations (these should be at the end)
-eval "$(fzf --zsh)"
-eval "$(zoxide init --cmd cd zsh)"
