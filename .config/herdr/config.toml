@@ -1,0 +1,76 @@
+onboarding = false
+
+[theme]
+name = "tokyo-night"
+auto_switch = true
+dark_name = "tokyo-night"
+light_name = "catppuccin-latte"
+
+[theme.custom]
+sidebar_bg = "#1a1b26"
+panel_bg = "#1a1b26"
+active_row_bg = "#24283b"
+selection_bg = "#2f334d"
+surface0 = "#24283b"
+surface1 = "#292e42"
+surface_dim = "#16161e"
+overlay0 = "#414868"
+overlay1 = "#6d7bab"
+text = "#c0caf5"
+subtext0 = "#a9b8e8"
+accent = "#7aa2f7"
+mauve = "#bb9af7"
+green = "#9ece6a"
+blue = "#7aa2f7"
+red = "#f7768e"
+yellow = "#e0af68"
+teal = "#73daca"
+peach = "#ff9e64"
+
+[ui]
+pane_borders = true
+pane_outer_borders = true
+pane_gaps = true
+pane_scrollbars = true
+show_agent_labels_on_pane_borders = true
+tab_bar_position = "top"
+status_indicators = "symbols"
+window_title = "{hostname}: {workspace}"
+tab_bar_right_separator = " · "
+tab_bar_right = [
+  { type = "zoom" },
+  { type = "command", command = "~/.config/herdr/status.sh", interval_seconds = 5, timeout_seconds = 2 },
+  { type = "datetime", format = "%H:%M" },
+]
+
+[ui.sidebar.agents]
+row_gap = 1
+rows = [
+  [
+    { token = "state_icon", dim = false },
+    { token = "terminal_title_stripped", fg = "#c0caf5", bold = true, dim = false },
+    { token = "tab", fg = "#7aa2f7", dim = false },
+  ],
+  [
+    { token = "agent", fg = "#a9b8e8", dim = false },
+    { token = "state_text", fg = "#9ece6a", dim = false },
+  ],
+  [
+    { token = "workspace", fg = "#6d7bab", dim = false },
+  ],
+]
+
+[ui.sidebar.spaces]
+row_gap = 1
+rows = [
+  [
+    { token = "state_icon", dim = false },
+    { token = "workspace", fg = "#c0caf5", bold = true, dim = false },
+    { token = "branch", fg = "#bb9af7", dim = false },
+    { token = "git_status", fg = "#e0af68", dim = false },
+  ],
+]
+
+[ui.toast]
+delivery = "herdr"
+delay_seconds = 1

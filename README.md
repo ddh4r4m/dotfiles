@@ -71,6 +71,11 @@ brew install thefuck
 ```
 
 ```
+brew install herdr
+brew install --cask ghostty
+```
+
+```
 git clone https://github.com/zsh-users/zsh-completions.git \
   ${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions
 ```
