@@ -33,6 +33,44 @@ then use GNU stow to create symlinks
 $ stow .
 ```
 
+## Herdr Setup
+
+Herdr is an agent-aware terminal multiplexer (tmux-like) used alongside Ghostty. Its config lives at `.config/herdr/` in this repo and gets symlinked to `~/.config/herdr/`.
+
+1. Install herdr and Ghostty:
+
+```
+brew install herdr
+brew install --cask ghostty
+```
+
+2. Stow this repo (if you haven't already) so `~/.config/herdr/config.toml` and `~/.config/herdr/status.sh` symlink in:
+
+```
+$ cd ~/dotfiles
+$ stow .
+```
+
+3. Make sure the status bar script is executable (stow preserves permissions, but verify after a fresh clone):
+
+```
+chmod +x ~/.config/herdr/status.sh
+```
+
+4. Reload herdr's config without restarting the server:
+
+```
+herdr server reload-config
+```
+
+5. Fully quit and relaunch Ghostty at least once so `theme = TokyoNight Night` and other terminal-level settings take effect.
+
+What's included:
+- `theme.custom` — tokyo-night-matched colors for sidebar, panels, and text so nothing falls back to unreadable defaults
+- `ui.sidebar.agents` / `ui.sidebar.spaces` — custom row layouts with `dim = false` on every token, since herdr auto-dims unfocused rows otherwise
+- `ui.pane_borders` / `pane_gaps` / `show_agent_labels_on_pane_borders` — visible pane separation with agent names on borders
+- `status.sh` — feeds a `load · battery` widget into the top-right status bar via `ui.tab_bar_right`
+
 ## Other Packages
 ```
 brew install zoxide
